@@ -1,0 +1,344 @@
+%%
+%% This is file `sample-sigconf.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `all,proceedings,bibtex,sigconf')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-sigconf.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+%%
+%% The first command in your LaTeX source must be the \documentclass
+%% command.
+%%
+%% For submission and review of your manuscript please change the
+%% command to \documentclass[manuscript, screen, review]{acmart}.
+%%
+%% When submitting camera ready or to TAPS, please change the command
+%% to \documentclass[sigconf]{acmart} or whichever template is required
+%% for your publication.
+%%
+%%
+% \documentclass[sigconf]{acmart}
+\documentclass[sigconf,natbib=true]{acmart}
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+\setcopyright{acmlicensed}
+\copyrightyear{2026}
+\acmYear{2026}
+\acmDOI{XXXXXXX.XXXXXXX}
+%% These commands are for a PROCEEDINGS abstract or paper.
+\acmConference[CHIIR '26]{Conference on Human Information Interaction and Retrieval}{March 22--26, 2026}{Seattle, WA, USA}
+%%
+%%  Uncomment \acmBooktitle if the title of the proceedings is different
+%%  from ``Proceedings of ...''!
+%%
+%%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+%%  June 03--05, 2018, Woodstock, NY}
+\acmISBN{978-1-4503-XXXX-X/2018/06}
+
+\usepackage{subcaption}
+\usepackage{booktabs}
+% \usepackage{siunitx}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\DeclareMathOperator{\Gen}{Gen}
+\DeclareMathOperator{\Update}{Update}
+\newcommand{\Dist}{\operatorname{Dist}}
+
+% --- deps
+\usepackage{booktabs,xcolor,colortbl,pgf} % pgf for \pgfmathsetmacro
+
+% --- palette
+\definecolor{AccGreen}{RGB}{49,163,84}   % accuracy (level)
+\definecolor{GainBlue}{RGB}{33,113,181}  % retrieval gains Δ
+\definecolor{PenRed}{RGB}{204,24,30}     % penalties (drops)
+
+% --- robust cell painters (build color spec first, then apply)
+\newcommand{\AccCell}[1]{%
+  \pgfmathsetmacro{\accpct}{min(100,max(0,100*(#1)))}%
+  \edef\colspec{AccGreen!\accpct!white}%
+  \expandafter\cellcolor\expandafter{\colspec}#1%
+}
+\newcommand{\DelCell}[1]{% Δ: assume up to ~0.33
+  \pgfmathsetmacro{\delpct}{min(100,max(0,300*(#1)))}%
+  \edef\colspec{GainBlue!\delpct!white}%
+  \expandafter\cellcolor\expandafter{\colspec}#1%
+}
+\newcommand{\PenCell}[1]{% negative=red, positive=green
+  \pgfmathsetmacro{\penmag}{min(100,max(0,400*abs(#1)))}%
+  \ifdim #1pt<0pt
+    \edef\colspec{PenRed!\penmag!white}%
+  \else
+    \edef\colspec{AccGreen!\penmag!white}%
+  \fi
+  \expandafter\cellcolor\expandafter{\colspec}#1%
+}
+
+
+
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% For managing citations, it is recommended to use bibliography
+%% files in BibTeX format.
+%%
+%% You can then either use BibTeX with the ACM-Reference-Format style,
+%% or BibLaTeX with the acmnumeric or acmauthoryear sytles, that include
+%% support for advanced citation of software artefact from the
+%% biblatex-software package, also separately available on CTAN.
+%%
+%% Look at the sample-*-biblatex.tex files for templates showcasing
+%% the biblatex styles.
+%%
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Information Seeking in the Age of Agentic AI: A Half-Day Tutorial}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+% --- Author block start
+\author{Preetam Dammu}
+\email{preetams@uw.edu}
+\affiliation{%
+  \institution{University of Washington, Information School}
+  \city{Seattle}
+  \state{WA}
+  \country{USA}
+}
+
+\author{Tanya Roosta}
+\email{troosta@ischool.berkeley.edu}
+\affiliation{%
+  \institution{UC Berkeley School of Information}
+  \city{Berkeley}
+  \state{CA}
+  \country{USA}
+}
+% --- Author block end
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+\renewcommand{\shortauthors}{Dammu and Roosta}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+Agentic AI systems are changing how people seek and use information. Yet, the research community has not fully adapted -- methods for studying, building, and assessing such systems often remain static, missing the interactive, temporal, and evidence-driven dynamics that characterize real information seeking. This half-day tutorial equips the CHIIR community with a concise, practice-oriented methodology for \emph{leveraging} and \emph{evaluating} information-seeking agents. We define a shared vocabulary for agents and connect it to user-centered IR constructs; we show how to design agentic workflows that elicit effective evidence seeking under temporal change (planning, tool choice, grounding); and we introduce log-based rubrics that score correctness, evidence support, adequacy, and cost. Short case studies and optional demonstrations using open frameworks (for example, Perplexica, local LLMs via Ollama, and metasearch engines such as SearXNG) illustrate how these ideas map to real systems. Attendees receive reusable materials, including slides and selected supplemental resources (e.g., example traces and optional demo notebooks), suitable for research and teaching. The tutorial assumes familiarity with core IR concepts but does not require prior experience with agent frameworks.
+\end{abstract}
+
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10002951.10003317</concept_id>
+       <concept_desc>Information systems~Information retrieval</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10002951.10003260</concept_id>
+       <concept_desc>Information systems~World Wide Web</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+ </ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Information systems~Information retrieval}
+\ccsdesc[500]{Information systems~World Wide Web}
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{Information Retrieval, Generative IR, LLMs, Agents}
+%% A "teaser" image appears between the author and affiliation
+%% information and the body of the document, and typically spans the
+%% page.
+
+
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+
+\maketitle
+
+\section{Motivation}
+Information-seeking behavior is increasingly mediated by agentic systems that plan, retrieve, and compose answers with tool use. These systems differ from classic retrieval pipelines because success depends on coordinated behavior across planning, evidence gathering, and grounded synthesis, often under temporal drift. For the CHIIR community, which centers users, interaction, credibility, and mixed-method evaluation, this change raises two needs: (i) a clear vocabulary that ties ``agents'' to CHIIR constructs, and (ii) methods and materials that let researchers and practitioners evaluate whether agents actually satisfy information needs with adequate, supported answers at reasonable cost.
+
+In addition to evaluation, practitioners need design guidance to \emph{leverage} agentic systems for information seeking. This includes task decomposition and subgoal selection, principled tool and data-source choice (e.g., metasearch, APIs, browsing, RAG), grounding strategies that privilege verifiable evidence, and prompt/plan schemas that make behavior inspectable. We position these design choices as central, and pair them with trace-aware evaluation so that methods for building and methods for measuring reinforce one another.
+
+Static leaderboards and text-only metrics are not sufficient for agentic IR. They fail to separate  seeking information from summarizing information, they blur retrieval-time leakage with model memorization, and they mask brittleness to freshness and context. This tutorial presents a coherent methodology that focuses on behavior: we design tasks that force evidence use, score answers with trace-aware rubrics, and diagnose where the agent fails (planning, retrieval, grounding, or synthesis). The goal is to make evaluations understandable, defensible, reproducible, and useful for both research and practice.
+
+Beyond raw answer accuracy, agentic IR requires assessing whether the system identified an appropriate subgoal, retrieved timely and trustworthy sources, and grounded its synthesis in verifiable evidence. We therefore emphasize answer-level judgments tied to observable behaviors: (i) \emph{correctness} of the final claim, (ii) \emph{support} via explicit attribution to sources, (iii) \emph{adequacy} with respect to the user’s stated need (sufficiency and relevance), and (iv) \emph{efficiency/cost} for practical deployment. Trace-aware diagnostics help attribute the failure to planning, retrieval, grounding, or synthesis steps, enabling targeted improvement rather than opaque aggregate scores. This approach is compatible with qualitative user studies and quantitative audits, and it supports reproducible comparison across agents operating over evolving information.
+
+\section{Positioning and Scope}
+This tutorial has a dual emphasis tailored to CHIIR: (A) \emph{leveraging} agentic systems for user-centered information seeking, and (B) \emph{evaluating} those systems with defensible, trace-aware methods. We cover: (i) foundational concepts for agentic systems framed for CHIIR audiences; (ii) workflow and task designs that elicit seeking and evidence use under temporal change (planning, tool choice, grounding, memory); (iii) answer-level rubrics for correctness, support, adequacy, and cost; and (iv) diagnostics that reveal where behavior fails (planning, retrieval, grounding, synthesis). We connect these elements to mixed-method study designs common at CHIIR, including lab studies, field deployments, and quantitative audits.
+
+We do not attempt a survey of all architectures, nor prescribe a single benchmark or framework. Instead, we provide design patterns, decision checklists, and reproducible protocols that attendees can adapt to their application domain. The emphasis is on transparent measurement and practical reuse of materials, rather than leaderboard performance.
+
+\section{Syllabus and Learning Outcomes}
+\textbf{Module 1: Information Seeking and the Agentic Shift.}
+From ranked lists to goal pursuit, we outline how agentic systems represent goals, plan, call tools, and compose answers, and we highlight what changes for CHIIR when interaction traces and evidence become central.
+
+\medskip
+\textbf{Module 2: Agentic AI Foundations.}
+Agent archetypes (reactive, deliberative, learning) and core ingredients (profiling, knowledge, memory, reasoning and planning, reflection, action) are introduced alongside evaluation dimensions (autonomy, goal alignment, adaptability, transparency, safety). This shared vocabulary later maps to IR task design and measures.
+
+\medskip
+\textbf{Module 3: Agentic AI in IR and Generative IR.}
+We focus on IR-centric workflow design that elicits information seeking: task decomposition and subgoal planning; tool choice (metasearch, APIs, browsing, RAG); retrieval and grounding patterns; handling temporal drift; and reproducible protocols for constructing instances from live sources with appropriate controls.
+
+\medskip
+\textbf{Module 3.1: Prompting and Planning for Agentic IR.}
+Schema design for prompts and plans (roles, constraints, evidence requirements), memory and context management, and strategies for making actions inspectable and auditable without overfitting to a benchmark.
+
+\medskip
+\textbf{Module 4: Measuring What Matters.}
+Answer quality beyond n-grams: correctness, evidence support (attribution to sources), adequacy to the user's need, and efficiency/cost; trace-aware diagnostics that attribute the agent't failure to planning, retrieval, grounding, or synthesis; lightweight human-in-the-loop scoring with reliability checks, and when automation is appropriate.
+
+\medskip
+\textbf{Module 5: Case Studies and Open Problems.}
+QA tasks where answers may change or require periodic updates,  comparative reasoning for decision-making, and policy lookup that require tool use and citations; discussion of open directions in user modeling, personalization, safety, and governance for agentic IR.
+
+\medskip
+\noindent\textbf{Learning outcomes.} After this tutorial, attendees will be able to:
+\begin{itemize}
+    \item design agentic workflows for information seeking (planning, tool choice, grounding, and memory) that align with CHIIR constructs (needs, interactions, credibility, evidence);
+    \item stress information seeking rather than only summarization through task and instance design;
+    \item detect and control for contamination and temporal drift, and select appropriate safeguards during construction and evaluation;
+    \item apply trace-aware rubrics that score correctness, evidence support, adequacy, and cost, and instrument traces for diagnosis;
+    \item prototype and audit small agentic IR scenarios using open frameworks, with materials reusable in research and teaching.
+\end{itemize}
+
+\section{Format and Activities (Half-Day)}
+The tutorial is a half-day session that combines short talks with two short guided activities and plenary debriefs. Activities will be adjusted to the room setup and audience needs. For example:
+\begin{itemize}
+    \item \textit{Activity A (workflow sketch)}: participants may outline a plan and toolchain for a concrete information need (sources, tool calls, grounding checkpoints), or annotate a short agent trace to identify planning, retrieval, grounding, and synthesis steps.
+    \item \textit{Activity B (answer evaluation)}: participants may compare two candidate answers on a current-events task using a lightweight rubric for correctness, support, adequacy, and cost, followed by a short pair discussion.
+\end{itemize}
+We will familiarize attendees with open frameworks and tools used in practice, such as Perplexica\footnote{\url{https://github.com/ItzCrazyKns/Perplexica}}, local LLMs via Ollama\footnote{\url{https://ollama.com}}, and metasearch engines such as SearXNG\footnote{\url{https://searxng.org}}. Any demonstrations are illustrative and optional; all activities function offline from provided PDFs.
+
+\section{Intended Audience and Prerequisites}
+Researchers, students, and practitioners in IR, HCI for IR, evaluation, and applied ML who are interested in user-centered study of agentic information access. Familiarity with core IR concepts is assumed. No prior experience with agentic frameworks is required.
+
+\section{Presenter Information}
+\textbf{Preetam Dammu} is a Ph.D. candidate in Information Science at the University of Washington, specializing in generative information retrieval and information-seeking agents. His work develops comprehensive methods for evaluating retrieval-augmented and agentic systems in dynamic, open-web settings, emphasizing reliability, evidence use, and safety. Preetam brings applied experience from multiple industry roles, including Applied Scientist internships at AWS AI and Amazon Science, where he worked on robust evaluations of RAG systems, generative agents for shopping, and evidence attribution in LLM-generated text. His research has been published in venues such as SIGIR, WSDM, EMNLP, IJCAI, and The Web Conference, and he also holds multiple U.S. patents. Email: \texttt{preetams@uw.edu}.
+
+\medskip
+\textbf{Tanya Roosta} is a Senior Science Manager at Amazon, specializing in generative AI for natural language processing (NLP) and information retrieval. She leads feature development across key areas of Amazon Shopping, driving innovations that enhance the customer experience. Concurrently, Tanya serves as a lecturer in the Department of Information Science at UC Berkeley.
+Before joining Amazon, Tanya was the Lead Research Scientist at an early-stage fintech startup, where she developed cutting-edge solutions in efficient topic modeling, sentiment analysis, and social media trend detection using deep neural networks and advanced statistical methods. Her work was successfully deployed via AWS APIs, demonstrating impactful real-world applications.
+Tanya holds a Ph.D. in Electrical Engineering, along with Master's degrees in Mathematical Finance and Statistics. Her research has been widely recognized, with publications in top-tier conferences and journals, as well as patents resulting from her industry work. Tanya has delivered tutorials and invited talks on agentic AI on multiple occasions. Email: \texttt{troosta@ischool.berkeley.edu}.
+
+\section{Materials and Sharing}
+We will release slides and selected supplemental materials (e.g., example traces and optional demo notebooks) on a public website after acceptance, and we will update materials before delivery. The materials are designed for reuse in labs and courses.
+
+\clearpage
+
+\section*{Supplementary Document}
+\subsection*{Proposed Outline with Timing}
+The following schedule reflects a typical half-day flow; minor adjustments may be made on site for pacing and audience interaction.
+\begin{itemize}
+    \item 00:00--00:15 Goals, audience, and participation (talk). \textit{Objective: align on scope, outcomes, and how to participate.}
+    \item 00:15--00:35 Module 1: Information seeking and the agent turn (talk). \textit{Objective: motivate the agentic shift for CHIIR and define key terms.}
+    \item 00:35--01:10 Module 2: Agentic AI foundations (talk; Roosta). \textit{Objective: establish shared vocabulary and evaluation dimensions.}
+    \item 01:10--01:25 Activity A: workflow sketch or trace anatomy (guided activity). \textit{Objective: surface design choices and observable agent behaviors.}
+    \item 01:25--01:35 Break.
+    \item 01:35--02:05 Module 3: Agentic AI in IR and Generative IR (talk). \textit{Objective: present workflow patterns for planning, tool choice, and grounding under temporal change.}
+    \item 02:05--02:35 Module 4: Measuring what matters (talk + short demo). \textit{Objective: introduce trace-aware rubrics for correctness, support, adequacy, and cost.}
+    \item 02:35--02:55 Activity B: answer evaluation (guided activity + pair debrief). \textit{Objective: practice applying lightweight rubrics and articulating rationales.}
+    \item 02:55--03:00 Closing: readings, materials, and directions (talk). \textit{Objective: provide takeaways and pointers for reuse.}
+\end{itemize}
+
+\subsection*{Room and Equipment}
+Projector and screen; one whiteboard for debrief. Wi-Fi is optional but preferred for the demos. Access to power outlets is helpful for laptops. We will ensure slides and handouts follow accessibility good practices (readable fonts and color-blind-friendly palettes).
+
+\subsection*{Materials Included}
+Slides for all modules; lightweight activity handouts or demo notebooks as appropriate; example traces and answers; a short pre-tutorial reading list; and reproducibility notes for running the activities in a class or lab.
+
+\subsection*{Website (post-acceptance)}
+A simple public page will host slides, example traces, and optional demo notebooks. The URL will be shared after acceptance and updated prior to delivery.
+
+\subsection*{100-word Blurb}
+Agentic AI is changing how people seek, verify, and use information. This half-day tutorial gives CHIIR attendees a practical framework to \emph{leverage and evaluate} information-seeking agents. We cover agent foundations, IR-centric workflow and task design (planning, tool choice, grounding), and trace-aware evaluation that scores correctness, evidence support, adequacy, and cost. Short, hands-on activities walk participants through sketching workflows and scoring answers with lightweight rubrics. The tutorial is aimed at researchers, students, and practitioners interested in user-centered agentic information access and generative IR. Participants will take home slides, example traces, optional demo notebooks, and a reading list to reuse in research and teaching.
+
+
+\clearpage
+
+
+%\bibliographystyle{ACM-Reference-Format}
+%\bibliography{bibliography}
+
+
+\end{document}

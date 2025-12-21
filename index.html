@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Information Seeking in the Age of Agentic AI: A Half-Day Tutorial at ACM SIGIR CHIIR'26">
+    <title>Information Seeking in the Age of Agentic AI | CHIIR'26 Tutorial</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo">ISA Tutorial</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-left">
+                        <h1>Information Seeking in the Age of Agentic AI</h1>
+                    </div>
+                    <div class="hero-right">
+                        <p class="subtitle">A Half-Day Tutorial at ACM SIGIR CHIIR'26</p>
+                        <p class="conference-info">March 22--26, 2026 | Seattle, WA, USA</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <section id="abstract" class="section">
+                    <h2>Abstract</h2>
+                    <p>Agentic AI systems are changing how people seek and use information. Yet, the research community has not fully adapted. Methods for studying, building, and assessing such systems often remain static, missing the interactive, temporal, and evidence-driven dynamics that characterize real information seeking. This half-day tutorial equips the CHIIR community with a concise, practice-oriented methodology for <em>leveraging</em> and <em>evaluating</em> information-seeking agents. We define a shared vocabulary for agents and connect it to user-centered IR constructs; we show how to design agentic workflows that elicit effective evidence seeking under temporal change (planning, tool choice, grounding); and we introduce log-based rubrics that score correctness, evidence support, adequacy, and cost. Short case studies and optional demonstrations using open frameworks (for example, Perplexica, local LLMs via Ollama, and metasearch engines such as SearXNG) illustrate how these ideas map to real systems. Attendees receive reusable materials, including slides and selected supplemental resources (e.g., example traces and optional demo notebooks), suitable for research and teaching. The tutorial assumes familiarity with core IR concepts but does not require prior experience with agent frameworks.</p>
+                </section>
+
+                <section id="presenters" class="section">
+                    <h2>Presenters</h2>
+                    <div class="presenters-grid">
+                        <div class="presenter">
+                            <h3>Preetam Dammu</h3>
+                            <p class="affiliation">University of Washington, Information School</p>
+                            <p class="email">Email: <a href="mailto:preetams@uw.edu">preetams@uw.edu</a></p>
+                            <p id="preetam-bio" class="bio-content">Preetam Dammu is a Ph.D. candidate in Information Science at the University of Washington, specializing in generative information retrieval and information-seeking agents. His work develops comprehensive methods for evaluating retrieval-augmented and agentic systems in dynamic, open-web settings, emphasizing reliability, evidence use, and safety. Preetam brings applied experience from multiple industry roles, including Applied Scientist internships at AWS AI and Amazon Science, where he worked on robust evaluations of RAG systems, generative agents for shopping, and evidence attribution in LLM-generated text. His research has been published in venues such as SIGIR, WSDM, EMNLP, IJCAI, and The Web Conference, and he also holds multiple U.S. patents.</p>
+                        </div>
+                        <div class="presenter">
+                            <h3>Tanya Roosta</h3>
+                            <p class="affiliation">UC Berkeley School of Information & Amazon</p>
+                            <p class="email">Email: <a href="mailto:troosta@ischool.berkeley.edu">troosta@ischool.berkeley.edu</a></p>
+                            <p id="tanya-bio" class="bio-content">Tanya is a senior science manager at Amazon, working on generative AI techniques for natural language processing and information retrieval problems, and leading feature development for various aspects of Amazon Shopping. She concurrently holds a lecturer position at Department of Information Science at UC Berkeley. Prior to Amazon, she worked at an early-stage Fintech startup as the lead research scientist working on efficient topic modeling, sentiment analysis and social media trending-topic detection. Her research used deep neural networks, and advanced statistical modeling, and the resulting features were implemented through AWS APIs. Tanya also has over 9 years of work experience in quantitative finance and investment banking, working as a director of risk and finance analytics at Moody’s, quantitative researcher at the Economic department of Federal Reserve Bank of San Francisco, and quantitative modeling for systematic portfolio management at Allianz. She holds a Ph.D. in Electrical Engineering, a Masters in Mathematical finance, and a Masters in Statistics. She has published in several conferences and journals, and holds patents as part of her industry work.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="learning-outcomes" class="section">
+                    <h2>Learning Outcomes</h2>
+                    <p>The tutorial is designed for practitioners and researchers interested in understanding how to leverage and evaluate agentic systems for information seeking. It is relevant to all conference attendees, including students, early-career, and experienced researchers.</p>
+                    <p>This tutorial will provide attendees with:</p>
+                    <ul class="outcomes-list">
+                        <li>An understanding of agentic workflows for information seeking and how they connect to CHIIR constructs;</li>
+                        <li>Insights into designing tasks that emphasize information seeking over summarization;</li>
+                        <li>Methods for evaluating agentic systems using trace-aware rubrics and diagnostics;</li>
+                        <li>Practical exposure to open frameworks and tools for prototyping agentic IR scenarios.</li>
+                    </ul>
+                </section>
+
+                <section id="schedule" class="section">
+                    <h2>Tentative Schedule</h2>
+                    <p class="schedule-note">The following schedule reflects a typical half-day flow; minor adjustments may be made on site for pacing and audience interaction.</p>
+                    <div class="schedule-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Activity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>00:00--00:15</td>
+                                    <td><strong>Goals, audience, and participation</strong> (talk)<br><em>Objective: align on scope, outcomes, and how to participate.</em></td>
+                                </tr>
+                                <tr>
+                                    <td>00:15--00:35</td>
+                                    <td><strong>Module 1: Information seeking and the agent turn</strong> (talk)<br><em>Objective: motivate the agentic shift for CHIIR and define key terms.</em></td>
+                                </tr>
+                                <tr>
+                                    <td>00:35--01:10</td>
+                                    <td><strong>Module 2: Agentic AI foundations</strong> (talk)<br><em>Objective: establish shared vocabulary and evaluation dimensions.</em></td>
+                                </tr>
+                                <tr>
+                                    <td>01:10--01:25</td>
+                                    <td><strong>Activity A: workflow sketch or trace anatomy</strong> (guided activity)<br><em>Objective: surface design choices and observable agent behaviors.</em></td>
+                                </tr>
+                                <tr>
+                                    <td>01:25--01:35</td>
+                                    <td><em>Break</em></td>
+                                </tr>
+                                <tr>
+                                    <td>01:35--02:05</td>
+                                    <td><strong>Module 3: Agentic AI in IR and Generative IR</strong> (talk)<br><em>Objective: present workflow patterns for planning, tool choice, and grounding under temporal change.</em></td>
+                                </tr>
+                                <tr>
+                                    <td>02:05--02:35</td>
+                                    <td><strong>Module 4: Measuring what matters</strong> (talk + short demo)<br><em>Objective: introduce trace-aware rubrics for correctness, support, adequacy, and cost.</em></td>
+                                </tr>
+                                <tr>
+                                    <td>02:35--02:55</td>
+                                    <td><strong>Activity B: answer evaluation</strong> (guided activity + pair debrief)<br><em>Objective: practice applying lightweight rubrics and articulating rationales.</em></td>
+                                </tr>
+                                <tr>
+                                    <td>02:55--03:00</td>
+                                    <td><strong>Closing: readings, materials, and directions</strong> (talk)<br><em>Objective: provide takeaways and pointers for reuse.</em></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="audience" class="section">
+                    <h2>Intended Audience and Prerequisites</h2>
+                    <p>Researchers, students, and practitioners in IR, HCI for IR, evaluation, and applied ML who are interested in user-centered study of agentic information access. Familiarity with core IR concepts is assumed. No prior experience with agentic frameworks is required.</p>
+                </section>
+
+                <section id="materials" class="section">
+                    <h2>Materials</h2>
+                    <p>We will release slides and selected supplemental materials (e.g., example traces and optional demo notebooks) on this website soon, and we will update materials before delivery.</p>
+                    <div class="materials-list">
+                        <div class="material-item">
+                            <h3>Slides</h3>
+                            <p><em>TBD</em></p>
+                        </div>
+                        <div class="material-item">
+                            <h3>Example Traces</h3>
+                            <p><em>TBD</em></p>
+                        </div>
+                        <div class="material-item">
+                            <h3>Demo Notebooks</h3>
+                            <p><em>TBD</em></p>
+                        </div>
+                        <div class="material-item">
+                            <h3>Reading List</h3>
+                            <p><em>TBD</em></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Preetam Dammu</p>
+            <p class="acknowledgment">This tutorial will be presented at ACM SIGIR CHIIR'26, March 22--26, 2026, Seattle, WA, USA</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const storedTheme = localStorage.getItem('theme');
+        
+        // Set initial theme
+        if (storedTheme) {
+            document.body.classList.toggle('dark-mode', storedTheme === 'dark');
+        } else if (prefersDark) {
+            document.body.classList.add('dark-mode');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+    </script>
+</body>
+</html>
+
