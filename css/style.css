@@ -218,6 +218,7 @@ em {
     border-radius: 8px;
     border-left: 4px solid var(--secondary-color);
     transition: var(--transition);
+    text-align: center;
 }
 
 .presenter:hover {
@@ -225,9 +226,21 @@ em {
     transform: translateY(-2px);
 }
 
+.presenter-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
 .presenter h3 {
     margin-top: 0;
     color: var(--secondary-color);
+    text-align: center;
 }
 
 .presenter .affiliation {
@@ -235,11 +248,17 @@ em {
     color: var(--text-color);
     opacity: 0.8;
     margin-bottom: 0.5rem;
+    text-align: center;
 }
 
 .presenter .email {
     margin-bottom: 1rem;
     font-size: 0.95rem;
+    text-align: center;
+}
+
+.presenter .bio-content {
+    text-align: left;
 }
 
 /* Learning outcomes */
@@ -454,6 +473,11 @@ footer .acknowledgment {
 
     .presenters-grid {
         grid-template-columns: 1fr;
+    }
+
+    .presenter-photo {
+        width: 120px;
+        height: 120px;
     }
 
     .materials-list {
