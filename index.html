@@ -6,6 +6,7 @@
     <meta name="description" content="Information Seeking in the Age of Agentic AI: A Half-Day Tutorial at ACM SIGIR CHIIR'26">
     <title>Information Seeking in the Age of Agentic AI | CHIIR'26 Tutorial</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/task1/task1.css">
 </head>
 <body>
     <header>
@@ -151,6 +152,12 @@
                         </div>
                     </div>
                 </section>
+
+                <section id="task1" class="section">
+                    <h2>Task 1: Complexity Ladder</h2>
+                    <p>Practice classifying information-seeking questions into Complexity Ladder levels. For each set, choose one level per question, justify your choice, then submit to see feedback. Your progress is saved in this browser unless you clear site data.</p>
+                    <div id="task1-complexity-quiz"></div>
+                </section>
             </div>
         </section>
     </main>
@@ -181,6 +188,10 @@
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
 
+    </script>
+    <script type="module">
+        import { initTask1Quiz } from './assets/task1/task1.js';
+        initTask1Quiz();
     </script>
 </body>
 </html>
