@@ -5,7 +5,7 @@ import {
   STORAGE_VERSION,
 } from "./task1-data.js";
 
-const MIN_JUSTIFICATION = 20;
+const MIN_JUSTIFICATION = 5;
 
 /** @typedef {{ submitted: boolean, choices: Record<string, string>, justifications: Record<string, string> }} SetState */
 
@@ -82,15 +82,33 @@ function render(root) {
   intro.className = "task1-quiz__intro";
   intro.innerHTML = `
     <h3>How to classify each question</h3>
-    <p>For each question, pick the single best Complexity Ladder level. Decide by thinking about:</p>
-    <ul>
-      <li><strong>(a)</strong> External information channel (API vs indexed database vs open web)</li>
-      <li><strong>(b)</strong> Freshness / temporal sensitivity</li>
-      <li><strong>(c)</strong> Synthesis requirement</li>
-      <li><strong>(d)</strong> Multi-hop dependency / tool calls</li>
-      <li><strong>(e)</strong> Scope of evidence (single source vs broad corpus coverage)</li>
-      <li><strong>(f)</strong> Interaction pattern (one-shot vs iterative / exploratory)</li>
-    </ul>
+    <p>For each question, pick the single best Complexity Ladder level. Use these <strong>properties determining position on the Complexity Ladder</strong>:</p>
+    <ol class="task1-quiz__properties">
+      <li>
+        <strong>External Information Channel</strong>
+        <p class="task1-quiz__property-detail">Is it an API that returns clean JSONs? Is it an indexed DB? Open Web?</p>
+      </li>
+      <li>
+        <strong>Freshness and temporal sensitivity</strong>
+        <p class="task1-quiz__property-detail">Is the answer stable, or does it change daily/hourly?</p>
+      </li>
+      <li>
+        <strong>Synthesis requirement</strong>
+        <p class="task1-quiz__property-detail">Does it require summarizing, comparing, or reasoning across multiple sources?</p>
+      </li>
+      <li>
+        <strong>Multi-hop dependency</strong>
+        <p class="task1-quiz__property-detail">Do you need intermediate sub-questions or tool calls to get the final answer?</p>
+      </li>
+      <li>
+        <strong>Scope of evidence</strong>
+        <p class="task1-quiz__property-detail">Is it enough to cite one source, or do we need broad coverage across a corpus?</p>
+      </li>
+      <li>
+        <strong>Interaction pattern</strong>
+        <p class="task1-quiz__property-detail">One-shot lookup vs iterative clarification, mixed-initiative dialogue, exploration.</p>
+      </li>
+    </ol>
   `;
   root.appendChild(intro);
 
@@ -105,11 +123,6 @@ function render(root) {
     h2.className = "task1-quiz__set-title";
     h2.textContent = `Set ${setIndex + 1}`;
     section.appendChild(h2);
-
-    const sub = document.createElement("p");
-    sub.className = "task1-quiz__set-subtitle";
-    sub.textContent = set.title;
-    section.appendChild(sub);
 
     const cardsWrap = document.createElement("div");
     cardsWrap.className = "task1-quiz__cards";
@@ -166,11 +179,13 @@ function render(root) {
 
       const ta = document.createElement("textarea");
       ta.className = "task1-quiz__textarea";
-      ta.placeholder =
-        "Why this level? Mention freshness, evidence scope, and tool calls.";
+      ta.placeholder = "Why is this level most suitable?";
       ta.dataset.questionId = q.id;
       ta.dataset.setId = set.id;
-      ta.setAttribute("aria-label", "Justification for your complexity choice");
+      ta.setAttribute(
+        "aria-label",
+        "Why this complexity level is most suitable for the question"
+      );
       card.appendChild(ta);
 
       const errEl = document.createElement("p");
@@ -329,8 +344,7 @@ function handleSubmitSet(root, setId) {
 
   if (!valid) {
     if (setErr) {
-      setErr.textContent =
-        "Fix the highlighted items: each question needs a level and a justification (min. 20 characters).";
+      setErr.textContent = `Fix the highlighted items: each question needs a level and a justification (min. ${MIN_JUSTIFICATION} characters).`;
       setErr.hidden = false;
     }
     persist();
@@ -461,7 +475,7 @@ function showFeedbackForSet(root, setId) {
     fb.innerHTML = `
       <div class="task1-quiz__verdict ${verdictClass}">${verdictText}</div>
       <div class="task1-quiz__feedback-row"><strong>Your choice:</strong> ${escapeHtml(userChoice)}</div>
-      <div class="task1-quiz__feedback-row"><strong>Correct level:</strong> ${escapeHtml(q.correctLevel)}</div>
+      <div class="task1-quiz__feedback-row"><strong>Suggested level:</strong> ${escapeHtml(q.correctLevel)}</div>
       <div class="task1-quiz__feedback-row"><strong>Why:</strong> ${escapeHtml(q.goldJustification)}</div>
     `;
     fb.hidden = false;
@@ -469,7 +483,7 @@ function showFeedbackForSet(root, setId) {
 
   const scoreEl = setSection.querySelector(`[data-score-for="${setId}"]`);
   if (scoreEl) {
-    scoreEl.textContent = `Score: ${correct}/3`;
+    scoreEl.textContent = `Score: ${correct}/${set.questions.length}`;
     scoreEl.hidden = false;
   }
 }
