@@ -23,7 +23,112 @@
                 <section class="section">
                     <p><a href="index.html">← Tutorial home</a></p>
                     <h1>Activity D: Agentic Navigation</h1>
-                    <p>Materials for this activity will be linked here before the tutorial.</p>
+
+                    <p>
+                        A hands-on Jupyter notebook that demonstrates why some questions require
+                        multi-step navigation — following links programmatically rather than relying on
+                        a single search or API call. The agent is implemented with the
+                        <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">ReAct framework</a>
+                        (Reason + Act) using plain <code>requests</code> and <code>BeautifulSoup</code> — no external
+                        agent library required.
+                    </p>
+
+                    <div class="activity-launch">
+                        <a href="#" class="colab-badge-link" style="opacity:0.5;cursor:default;" aria-disabled="true">
+                            <img src="https://colab.research.google.com/assets/colab-badge.svg"
+                                 alt="Open notebook (link coming soon)" height="28">
+                        </a>
+                        <span class="activity-runtime">Notebook link coming soon &middot; Colab T4 GPU recommended &middot; ~25 min</span>
+                    </div>
+
+                    <h2>How to run this notebook</h2>
+                    <div class="module">
+                        <h3>Option A — Google Colab (easier)</h3>
+                        <ol style="padding-left:1.25rem; margin:0.5rem 0 0;">
+                            <li>Click the <strong>Open in Colab</strong> button above once the link is live.</li>
+                            <li>
+                                In the top-left menu choose <strong>File → Open in Colab</strong>.<br>
+                                <em>Use a <strong>personal Google account</strong> rather than a work or university account — institutional accounts sometimes block third-party Colab access.</em>
+                            </li>
+                            <li>
+                                <strong>Make it editable: File → Save a copy in Drive.</strong><br>
+                                The shared notebook is view-only; saving a copy to your own Drive gives you a personal, fully editable version.
+                            </li>
+                            <li>
+                                Enable a GPU: <strong>Runtime → Change runtime type → T4 GPU → Save</strong>.<br>
+                                This activity uses Phi-3.5-mini (3.8 B params) which needs ~4 GB VRAM. A T4 is required for comfortable speed.
+                            </li>
+                            <li>Run cells top-to-bottom with <strong>Runtime → Run all</strong>, or step through them with <kbd>Shift+Enter</kbd>.</li>
+                        </ol>
+                    </div>
+                    <div class="module">
+                        <h3>Option B — Local Jupyter (laptop)</h3>
+                        <ol style="padding-left:1.25rem; margin:0.5rem 0 0;">
+                            <li>Download the notebook from the Drive link (<strong>File → Download → Download .ipynb</strong>).</li>
+                            <li>Install dependencies: <code>pip install transformers torch accelerate requests beautifulsoup4 ddgs</code></li>
+                            <li>Open with <code>jupyter notebook activity_d.ipynb</code> or in VS Code / Cursor.</li>
+                            <li>On CPU the model loads slowly (~2 min per generation step). A local GPU or the Colab option is recommended.</li>
+                        </ol>
+                    </div>
+
+                    <h2>What you will learn</h2>
+                    <ul class="outcomes-list">
+                        <li>Why some questions require multi-step navigation and cannot be answered by a single search query.</li>
+                        <li>How the <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">ReAct framework</a> structures agent reasoning: alternating <code>Thought:</code> / <code>Action:</code> / <code>Observation:</code> until an <code>Answer:</code> is reached.</li>
+                        <li>How to implement three navigation tools (<code>navigate</code>, <code>find_link</code>, <code>read_page</code>) with <code>requests</code> and <code>BeautifulSoup</code>.</li>
+                        <li>How to replicate the agent's steps manually in a browser and compare the traces.</li>
+                        <li>What evaluation looks like at Level 5: faithfulness, step efficiency, and robustness to page structure changes.</li>
+                    </ul>
+
+                    <h2>Complexity Ladder level covered</h2>
+                    <div class="schedule-table">
+                        <table>
+                            <thead>
+                                <tr><th>Level</th><th>Name</th><th>Key property</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>5</strong></td>
+                                    <td><strong>Agentic Navigation</strong></td>
+                                    <td>Multi-step navigation guided by a Reason+Act loop. The agent discovers the target URL by reading pages and following links — it is not given the URL directly. Evaluation requires checking faithfulness, step efficiency, and robustness.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>Notebook outline</h2>
+                    <ul class="outcomes-list">
+                        <li><strong>Setup:</strong> install 5 packages; load <code>Phi-3.5-mini-instruct</code> (T4 recommended; Qwen2-0.5B as CPU fallback).</li>
+                        <li><strong>Part 1 — Search fails:</strong> run a DuckDuckGo query for the latest commit → results point to blog posts and the repo homepage, not the commit page.</li>
+                        <li><strong>Part 2 — ReAct agent:</strong> define <code>navigate()</code>, <code>find_link()</code>, <code>read_page()</code> tools; implement the ReAct loop; run the agent and watch the full Thought → Action → Observation trace.</li>
+                        <li><strong>Part 3 — Browser comparison:</strong> step-by-step instructions to replicate the agent's navigation manually; observations table comparing search vs. navigation.</li>
+                        <li><strong>Recap:</strong> full Complexity Ladder table; Level 5 evaluation criteria; transition to Level 6 (Corpus Sensemaking).</li>
+                    </ul>
+
+                    <h2>Requirements</h2>
+                    <p>No API keys or signups needed:</p>
+                    <ul class="outcomes-list">
+                        <li><strong>Web navigation:</strong> <code>requests</code> + <code>beautifulsoup4</code> — fetch and parse any public HTML page.</li>
+                        <li><strong>Search demo:</strong> <a href="https://pypi.org/project/ddgs/" target="_blank" rel="noopener">ddgs</a> — DuckDuckGo search, free, no key.</li>
+                        <li><strong>Default model:</strong> <a href="https://huggingface.co/microsoft/Phi-3.5-mini-instruct" target="_blank" rel="noopener">microsoft/Phi-3.5-mini-instruct</a> — 3.8 B params, ~7 GB, T4 GPU recommended.</li>
+                        <li><strong>CPU fallback:</strong> <a href="https://huggingface.co/Qwen/Qwen2-0.5B-Instruct" target="_blank" rel="noopener">Qwen/Qwen2-0.5B-Instruct</a> — runs on any laptop; ReAct format adherence is less reliable.</li>
+                    </ul>
+
+                    <h2>Citation</h2>
+                    <p>If you use this tutorial in your work or teaching, please cite:</p>
+                    <pre style="background:var(--card-bg,#f6f8fa);border:1px solid var(--border-color,#d0d7de);border-radius:6px;padding:1rem;font-size:0.85rem;overflow-x:auto;">@inproceedings{dammu2026information,
+  title={Information Seeking in the Age of Agentic AI: A Half-Day Tutorial},
+  author={Dammu, Preetam Prabhu Srikar and Roosta, Tanya},
+  booktitle={Proceedings of the 2026 Conference on Human Information Interaction and Retrieval},
+  pages={429--430},
+  year={2026}
+}</pre>
+                    <p>
+                        <a href="https://dl.acm.org/doi/abs/10.1145/3786304.3787893"
+                           target="_blank" rel="noopener">View on ACM DL</a>
+                        &nbsp;&middot;&nbsp;
+                        <strong>Contact:</strong> Preetam Dammu &lt;preetams@uw.edu&gt;, PhD Candidate, University of Washington
+                    </p>
                 </section>
             </div>
         </section>
