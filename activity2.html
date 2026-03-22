@@ -31,12 +31,42 @@
                     </p>
 
                     <div class="activity-launch">
-                        <a href="https://colab.research.google.com/github/preetamsatish/ISA-Tutorial/blob/main/notebooks/activity_b.ipynb"
+                        <a href="https://drive.google.com/file/d/1iYplsstyWACp_TmCKNO_FapcmiAK_4g-/view?usp=sharing"
                            target="_blank" rel="noopener" class="colab-badge-link">
                             <img src="https://colab.research.google.com/assets/colab-badge.svg"
-                                 alt="Open in Google Colab" height="28">
+                                 alt="Open notebook" height="28">
                         </a>
-                        <span class="activity-runtime">Free Colab T4 GPU &middot; ~20 min</span>
+                        <span class="activity-runtime">Colab T4 GPU recommended &middot; also runs on laptop CPU &middot; ~20 min</span>
+                    </div>
+
+                    <h2>How to run this notebook</h2>
+                    <div class="module">
+                        <h3>Option A — Google Colab (easier)</h3>
+                        <ol style="padding-left:1.25rem; margin:0.5rem 0 0;">
+                            <li>Click the button above to open the notebook in Google Drive.</li>
+                            <li>
+                                In the top-left menu choose <strong>File → Open in Colab</strong>.<br>
+                                <em>Use a <strong>personal Google account</strong> rather than a work or university account — institutional accounts sometimes block third-party Colab access.</em>
+                            </li>
+                            <li>
+                                <strong>Make it editable: File → Save a copy in Drive.</strong><br>
+                                The shared notebook is view-only; saving a copy to your own Drive gives you a personal, fully editable version. All subsequent changes and outputs are saved there.
+                            </li>
+                            <li>
+                                Enable a free GPU: <strong>Runtime → Change runtime type → T4 GPU → Save</strong>.<br>
+                                A GPU is not required (the default model runs fine on CPU) but speeds up the RAG embedding step significantly.
+                            </li>
+                            <li>Run cells top-to-bottom with <strong>Runtime → Run all</strong>, or step through them one by one with <kbd>Shift+Enter</kbd>.</li>
+                        </ol>
+                    </div>
+                    <div class="module">
+                        <h3>Option B — Local Jupyter (laptop)</h3>
+                        <ol style="padding-left:1.25rem; margin:0.5rem 0 0;">
+                            <li>Download the notebook from the link above (<strong>File → Download → Download .ipynb</strong>).</li>
+                            <li>Install dependencies: <code>pip install transformers torch datasets rank_bm25 sentence-transformers requests</code></li>
+                            <li>Open with <code>jupyter notebook activity_b.ipynb</code> or in VS Code / Cursor.</li>
+                            <li>The default model (<code>Qwen2-0.5B-Instruct</code>) runs on CPU; no GPU or API key needed.</li>
+                        </ol>
                     </div>
 
                     <h2>What you will learn</h2>
@@ -70,18 +100,19 @@
 
                     <h2>Notebook outline</h2>
                     <ul class="outcomes-list">
-                        <li><strong>Setup:</strong> install dependencies, load Phi-3.5-mini-instruct with 4-bit quantization (fits on free T4 GPU).</li>
+                        <li><strong>Setup:</strong> install dependencies, load <code>Qwen2-0.5B-Instruct</code> (CPU-friendly default; swap to Phi-3.5-mini on T4 for richer outputs).</li>
                         <li><strong>Part 1 — Structured Lookup:</strong> LLM-only weather query (fails) → Open-Meteo API call (free, no key) → LLM with injected API context (succeeds).</li>
                         <li><strong>Part 2 — Grounded Closed-Corpus:</strong> load SQuAD Wikipedia passages as a closed corpus → LLM-only (hallucination) → RAG with BM25 → RAG with dense embeddings (all-MiniLM-L6-v2) → side-by-side retriever comparison across 3 questions.</li>
                         <li><strong>Part 3 — Recap:</strong> summary table comparing both levels across information source, freshness, synthesis, and evaluation dimensions.</li>
                     </ul>
 
                     <h2>Requirements</h2>
-                    <p>No accounts or API keys are needed. All data sources are public and free:</p>
+                    <p>No API keys or signups needed. Everything used is free and public:</p>
                     <ul class="outcomes-list">
-                        <li><strong>Weather API:</strong> <a href="https://open-meteo.com" target="_blank" rel="noopener">open-meteo.com</a> — open-source, no key, no signup.</li>
-                        <li><strong>Corpus:</strong> <a href="https://huggingface.co/datasets/rajpurkar/squad" target="_blank" rel="noopener">rajpurkar/squad</a> on HuggingFace — public dataset.</li>
-                        <li><strong>Model:</strong> <a href="https://huggingface.co/microsoft/Phi-3.5-mini-instruct" target="_blank" rel="noopener">microsoft/Phi-3.5-mini-instruct</a> — public HuggingFace model; no login required.</li>
+                        <li><strong>Weather API:</strong> <a href="https://open-meteo.com" target="_blank" rel="noopener">open-meteo.com</a> — open-source, no key required.</li>
+                        <li><strong>Corpus:</strong> <a href="https://huggingface.co/datasets/rajpurkar/squad" target="_blank" rel="noopener">rajpurkar/squad</a> on HuggingFace — public dataset, no login.</li>
+                        <li><strong>Default model:</strong> <a href="https://huggingface.co/Qwen/Qwen2-0.5B-Instruct" target="_blank" rel="noopener">Qwen/Qwen2-0.5B-Instruct</a> — 0.5 B params, ~1 GB, runs on CPU.</li>
+                        <li><strong>GPU upgrade (optional):</strong> <a href="https://huggingface.co/microsoft/Phi-3.5-mini-instruct" target="_blank" rel="noopener">microsoft/Phi-3.5-mini-instruct</a> — swap in the first code cell when running on Colab T4.</li>
                     </ul>
                 </section>
             </div>
