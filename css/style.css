@@ -436,6 +436,33 @@ tbody em {
     text-align: center;
 }
 
+/* Activity launch bar (Colab badge + runtime note) */
+.activity-launch {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+    flex-wrap: wrap;
+}
+
+.colab-badge-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.colab-badge-link:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.activity-runtime {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+}
+
 /* Footer */
 footer {
     background: var(--bg-secondary);

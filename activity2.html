@@ -23,7 +23,66 @@
                 <section class="section">
                     <p><a href="index.html">← Tutorial home</a></p>
                     <h1>Activity B: Structured Lookup &amp; Grounded Closed-Corpus</h1>
-                    <p>Materials for this activity will be linked here before the tutorial.</p>
+
+                    <p>
+                        A hands-on Jupyter notebook that demonstrates what goes wrong when an LLM is asked to
+                        answer information-seeking questions without the right information channel — and what
+                        goes right when it is given one. Two levels of the Complexity Ladder are covered in depth.
+                    </p>
+
+                    <div class="activity-launch">
+                        <a href="https://colab.research.google.com/github/preetamsatish/ISA-Tutorial/blob/main/notebooks/activity_b.ipynb"
+                           target="_blank" rel="noopener" class="colab-badge-link">
+                            <img src="https://colab.research.google.com/assets/colab-badge.svg"
+                                 alt="Open in Google Colab" height="28">
+                        </a>
+                        <span class="activity-runtime">Free Colab T4 GPU &middot; ~20 min</span>
+                    </div>
+
+                    <h2>What you will learn</h2>
+                    <ul class="outcomes-list">
+                        <li>Why an LLM alone cannot reliably answer live or structured-value queries, and how a single API call fixes it.</li>
+                        <li>How to build a minimal RAG pipeline (retrieve → prompt → generate) over a closed document corpus.</li>
+                        <li>How BM25 and dense (semantic) retrieval differ, when each wins, and how the choice of retriever changes the LLM's answer.</li>
+                        <li>What evaluation looks like at each level: trivial ground-truth comparison (Level 2) vs retrieval-hit + faithfulness checks (Level 3).</li>
+                    </ul>
+
+                    <h2>Complexity Ladder levels covered</h2>
+                    <div class="schedule-table">
+                        <table>
+                            <thead>
+                                <tr><th>Level</th><th>Name</th><th>Key property</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>Structured Lookup</strong></td>
+                                    <td>Single clean value from a deterministic API (weather, rates, time). Freshness handled by the provider; minimal LLM synthesis.</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><strong>Grounded Closed-Corpus</strong></td>
+                                    <td>Answer extracted from a fixed document set (RAG). Quality depends on chunking → retrieval → prompting. Evaluation requires retrieval-hit and faithfulness checks.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>Notebook outline</h2>
+                    <ul class="outcomes-list">
+                        <li><strong>Setup:</strong> install dependencies, load Phi-3.5-mini-instruct with 4-bit quantization (fits on free T4 GPU).</li>
+                        <li><strong>Part 1 — Structured Lookup:</strong> LLM-only weather query (fails) → Open-Meteo API call (free, no key) → LLM with injected API context (succeeds).</li>
+                        <li><strong>Part 2 — Grounded Closed-Corpus:</strong> load SQuAD Wikipedia passages as a closed corpus → LLM-only (hallucination) → RAG with BM25 → RAG with dense embeddings (all-MiniLM-L6-v2) → side-by-side retriever comparison across 3 questions.</li>
+                        <li><strong>Part 3 — Recap:</strong> summary table comparing both levels across information source, freshness, synthesis, and evaluation dimensions.</li>
+                    </ul>
+
+                    <h2>Requirements</h2>
+                    <p>No accounts or API keys are needed. All data sources are public and free:</p>
+                    <ul class="outcomes-list">
+                        <li><strong>Weather API:</strong> <a href="https://open-meteo.com" target="_blank" rel="noopener">open-meteo.com</a> — open-source, no key, no signup.</li>
+                        <li><strong>Corpus:</strong> <a href="https://huggingface.co/datasets/rajpurkar/squad" target="_blank" rel="noopener">rajpurkar/squad</a> on HuggingFace — public dataset.</li>
+                        <li><strong>Model:</strong> <a href="https://huggingface.co/microsoft/Phi-3.5-mini-instruct" target="_blank" rel="noopener">microsoft/Phi-3.5-mini-instruct</a> — public HuggingFace model; no login required.</li>
+                    </ul>
                 </section>
             </div>
         </section>
