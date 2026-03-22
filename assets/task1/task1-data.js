@@ -32,7 +32,7 @@ export const SETS = [
       },
       {
         id: "s1-q3",
-        text: "What is the current USD→INR exchange rate?",
+        text: "What is the current USD→EUR exchange rate?",
         correctLevel: "Structured Lookup",
         goldJustification:
           "A single numeric value typically returned by a finance API; little/no multi-hop reasoning required.",
@@ -51,10 +51,10 @@ export const SETS = [
       },
       {
         id: "s2-q2",
-        text: "As of today, what is the current routine U.S. passport processing time?",
+        text: "As of today, what is the current routine UHC health insurance claim processing time?",
         correctLevel: "Grounded Live-Corpus",
         goldJustification:
-          "Time-sensitive; policy pages change; needs live web retrieval and an authoritative source.",
+          "Time-sensitive; insurer claim-handling timelines and published guidance change; needs live web retrieval and an authoritative source.",
       },
       {
         id: "s2-q3",
@@ -146,4 +146,4 @@ export const SETS = [
 ];
 
 export const STORAGE_KEY = "isa-task1-complexity-quiz";
-export const STORAGE_VERSION = 2;
+export const STORAGE_VERSION = 3;
