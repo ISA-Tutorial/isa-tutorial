@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Activity D: Agentic Navigation — ISA Tutorial at ACM SIGIR CHIIR'26">
+    <title>Activity D: Agentic Navigation | ISA Tutorial</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">ISA Tutorial</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content">
+            <div class="container">
+                <section class="section">
+                    <p><a href="index.html">← Tutorial home</a></p>
+                    <h1>Activity D: Agentic Navigation</h1>
+                    <p>Materials for this activity will be linked here before the tutorial.</p>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Preetam Dammu</p>
+            <p class="acknowledgment">This tutorial will be presented at ACM SIGIR CHIIR'26, March 22--26, 2026, Seattle, WA, USA</p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const storedTheme = localStorage.getItem('theme');
+
+        if (storedTheme) {
+            document.body.classList.toggle('dark-mode', storedTheme === 'dark');
+        } else if (prefersDark) {
+            document.body.classList.add('dark-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>

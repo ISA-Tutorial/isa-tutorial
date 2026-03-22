@@ -288,6 +288,23 @@ em {
     font-size: 1.2rem;
 }
 
+/* Important links */
+.important-links-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0 0;
+}
+
+.important-links-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border-color);
+    line-height: 1.5;
+}
+
+.important-links-list li:last-child {
+    border-bottom: none;
+}
+
 /* Modules */
 .module {
     background: var(--bg-secondary);
