@@ -27,8 +27,8 @@
                     <p>
                         A hands-on Jupyter notebook that demonstrates why some questions can only be answered
                         by searching the live open web — and how to do that reliably using
-                        <a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG</a>,
-                        a free open-source metasearch engine that requires no API key or account.
+                        <a href="https://pypi.org/project/ddgs/" target="_blank" rel="noopener">DuckDuckGo Search</a>,
+                        a free, privacy-focused search library that requires no API key or account.
                     </p>
 
                     <div class="activity-launch">
@@ -63,17 +63,18 @@
                         <h3>Option B — Local Jupyter (laptop)</h3>
                         <ol style="padding-left:1.25rem; margin:0.5rem 0 0;">
                             <li>Download the notebook from the Drive link (<strong>File → Download → Download .ipynb</strong>).</li>
-                            <li>Install dependencies: <code>pip install transformers torch requests</code></li>
+                            <li>Install dependencies: <code>pip install transformers torch ddgs</code></li>
                             <li>Open with <code>jupyter notebook activity_c.ipynb</code> or in VS Code / Cursor.</li>
-                            <li>The default model (<code>Qwen2-0.5B-Instruct</code>) and SearXNG both work without GPU or API keys.</li>
+                            <li>The default model (<code>Qwen2-0.5B-Instruct</code>) and DuckDuckGo search both work without GPU or API keys.</li>
                         </ol>
                     </div>
 
                     <h2>What you will learn</h2>
                     <ul class="outcomes-list">
                         <li>Why LLMs alone, structured APIs, and fixed-corpus RAG all fail for questions that require today's information.</li>
-                        <li>How to use <a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG</a> as a free, keyless metasearch engine that aggregates 240+ search providers simultaneously.</li>
-                        <li>How to build a grounded live-search prompt that instructs the LLM to cite source URLs and publication dates.</li>
+                        <li>How to use the <a href="https://pypi.org/project/ddgs/" target="_blank" rel="noopener">ddgs</a> library as a free, keyless live search tool — no signup, no rate-limit headaches.</li>
+                        <li>How to distil a natural-language question into a short search phrase using the LLM before querying.</li>
+                        <li>How to build a grounded live-search prompt that instructs the LLM to cite source URLs.</li>
                         <li>How to handle heterogeneous source quality and conflicting snippets from the open web.</li>
                         <li>What evaluation looks like at Level 4: freshness, source credibility, and answer faithfulness — all three required.</li>
                     </ul>
@@ -96,19 +97,19 @@
 
                     <h2>Notebook outline</h2>
                     <ul class="outcomes-list">
-                        <li><strong>Setup:</strong> install 3 packages (<code>transformers</code>, <code>torch</code>, <code>requests</code>); load <code>Qwen2-0.5B-Instruct</code> (CPU-friendly default; swap to Phi-3.5-mini on T4).</li>
-                        <li><strong>Part 1 — LLM alone fails:</strong> ask a "this week" AI policy question with no context → stale/hedged answer; explain training cutoff.</li>
-                        <li><strong>Part 2 — SearXNG live search:</strong> <code>searxng_search()</code> helper with automatic instance fallback → inject top results as context → LLM gives current cited answer → repeat for 3 diverse live questions.</li>
+                        <li><strong>Setup:</strong> install 3 packages (<code>transformers</code>, <code>torch</code>, <code>ddgs</code>); load <code>Qwen2-0.5B-Instruct</code> (CPU-friendly default; swap to Phi-3.5-mini on T4).</li>
+                        <li><strong>Part 1 — LLM alone fails:</strong> ask about a recent event (Super Bowl 2026) with no context → stale/hedged answer; explain training cutoff.</li>
+                        <li><strong>Part 2 — DuckDuckGo live search:</strong> LLM distils question to a short phrase → <code>web_search()</code> fetches live results → inject as context → LLM gives current cited answer → repeat for 3 diverse live questions.</li>
                         <li><strong>Part 3 — Comparison:</strong> same live question fails on a hardcoded static corpus; decision table for when to use Level 2 vs. 3 vs. 4.</li>
-                        <li><strong>Part 4 — Source quality:</strong> inspect which search engines contributed each result; handle a deliberately ambiguous query where sources disagree.</li>
+                        <li><strong>Part 4 — Source quality:</strong> inspect domain diversity across results; handle a deliberately ambiguous query where sources disagree.</li>
                         <li><strong>Part 5 — Recap:</strong> full Complexity Ladder table comparing Levels 2–5; Level 4 → 5 transition explained.</li>
                     </ul>
 
                     <h2>Requirements</h2>
                     <p>No API keys or signups needed:</p>
                     <ul class="outcomes-list">
-                        <li><strong>Live search:</strong> <a href="https://searx.space/" target="_blank" rel="noopener">SearXNG public instances</a> — free, no account, aggregates 240+ search engines. The notebook automatically tries several instances in order.</li>
-                        <li><strong>Self-host option:</strong> run your own SearXNG with <code>docker run -d -p 8080:8080 searxng/searxng</code> and point the notebook to <code>http://localhost:8080</code> for a private, unthrottled instance.</li>
+                        <li><strong>Live search:</strong> <a href="https://pypi.org/project/ddgs/" target="_blank" rel="noopener">ddgs</a> — free Python library, no account, no key. Install with <code>pip install ddgs</code>.</li>
+                        <li><strong>Heavier experiments (optional):</strong> for higher query volume or a private unthrottled instance, self-host <a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG</a> locally with <code>docker run -d -p 8080:8080 searxng/searxng</code>.</li>
                         <li><strong>Default model:</strong> <a href="https://huggingface.co/Qwen/Qwen2-0.5B-Instruct" target="_blank" rel="noopener">Qwen/Qwen2-0.5B-Instruct</a> — 0.5 B params, ~1 GB, runs on CPU.</li>
                         <li><strong>GPU upgrade (optional):</strong> <a href="https://huggingface.co/microsoft/Phi-3.5-mini-instruct" target="_blank" rel="noopener">microsoft/Phi-3.5-mini-instruct</a> — swap in the first code cell when running on Colab T4.</li>
                     </ul>
