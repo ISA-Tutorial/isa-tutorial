@@ -204,6 +204,11 @@ em {
     margin-bottom: 0;
 }
 
+/* Tighten spacing before the first section heading ("Overview"). */
+#abstract h2 {
+    margin-top: 0;
+}
+
 /* Presenters grid */
 .presenters-grid {
     display: grid;
